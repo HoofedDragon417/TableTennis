@@ -11,6 +11,7 @@ import com.example.tabletennis.databinding.FragmentSetPlayerBinding
 import com.example.tabletennis.models.Gender
 import com.example.tabletennis.models.Pitcher
 import com.example.tabletennis.models.Player
+import com.example.tabletennis.models.Players
 import com.example.tabletennis.recycleradapters.SetPlayerAdapter
 import com.github.terrakok.cicerone.Router
 
@@ -85,12 +86,12 @@ class SetPlayerFragment(private val router: Router) : Fragment() {
         })
 
         binding.ivPlayerOneAvatar.setOnLongClickListener {
-            viewModel.clearPlayer(position = 0)
+            viewModel.clearPlayer(player = Players.First)
             true
         }
 
         binding.ivPlayerTwoAvatar.setOnLongClickListener {
-            viewModel.clearPlayer(position = 1)
+            viewModel.clearPlayer(player = Players.Second)
             true
         }
 
