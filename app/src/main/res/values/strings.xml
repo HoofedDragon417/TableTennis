@@ -24,6 +24,7 @@
     <string name="player_two">Player Two</string>
     <string name="player_one_won">Player one won</string>
     <string name="player_two_won">Player two won</string>
+    <string name="choose_players">Choose your players</string>
 
     <string name="empty_message">No players</string>
 

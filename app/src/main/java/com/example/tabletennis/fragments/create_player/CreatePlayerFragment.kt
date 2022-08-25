@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import com.example.tabletennis.R
 import com.example.tabletennis.databinding.FragmentCreatePlayerBinding
 import com.example.tabletennis.models.Gender
 import com.example.tabletennis.models.Player
@@ -38,7 +39,8 @@ class CreatePlayerFragment(private val router: Router) : Fragment() {
                 binding.rbtnFemale.isChecked -> Gender.Female
                 binding.rbtnAlien.isChecked -> Gender.Alien
                 else -> {
-                    Toast.makeText(context, "Choose your gender", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context, getString(R.string.choose_gender), Toast.LENGTH_SHORT)
+                        .show()
                     return@setOnClickListener
                 }
             }

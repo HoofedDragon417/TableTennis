@@ -95,11 +95,11 @@ class SetPlayerFragment(private val router: Router) : Fragment() {
         }
 
         binding.ivPlayerOneAvatar.setOnClickListener {
-            viewModel.startGame(Pitcher.PlayerOne)
+            viewModel.startGame(pitcher = Pitcher.PlayerOne, context = requireActivity())
         }
 
         binding.ivPlayerTwoAvatar.setOnClickListener {
-            viewModel.startGame(Pitcher.PlayerTwo)
+            viewModel.startGame(pitcher = Pitcher.PlayerTwo, context = requireActivity())
         }
     }
 
