@@ -15,39 +15,40 @@ class SetPlayerAdapter(
 ) :
     RecyclerView.Adapter<SetPlayerAdapter.SetPlayerViewHolder>() {
 
-    private lateinit var listener: onItemClickListener
+    private lateinit var listener: OnItemClickListener
 
-    interface onItemClickListener {
+    interface OnItemClickListener {
         fun onItemClick(position: Int)
     }
 
-    fun setOnItemClickListener(listener: onItemClickListener) {
+    fun setOnItemClickListener(listener: OnItemClickListener) {
         this.listener = listener
     }
 
     inner class SetPlayerViewHolder(
-        private val binding: RecyclerviewItemSetPlayerBinding, listener: onItemClickListener
+        private val binding: RecyclerviewItemSetPlayerBinding, listener: OnItemClickListener
     ) : RecyclerView.ViewHolder(binding.root) {
         fun bind(position: Int) {
             val item = items[position]
 
-            when (item.gender) {
-                Gender.Male -> setImage(R.drawable.avatar_male)
-                Gender.Female -> setImage(R.drawable.avatar_female)
-                Gender.Alien -> setImage(R.drawable.avatar_alien)
-            }
+            binding.playerName.setCompoundDrawablesWithIntrinsicBounds(
+                when (item.gender) {
+                    Gender.Male -> context.getDrawable(R.drawable.avatar_male_mini)
+                    Gender.Female -> context.getDrawable(R.drawable.avatar_female_mini)
+                    Gender.Alien -> context.getDrawable(R.drawable.avatar_alien_mini)
+                }, null,
+                null,
+                null
+            )
 
             binding.playerName.text = item.name
+
         }
 
         init {
             itemView.setOnClickListener {
                 listener.onItemClick(adapterPosition)
             }
-        }
-
-        private fun setImage(id: Int) {
-            binding.playerAvatar.setImageResource(id)
         }
     }
 

@@ -79,7 +79,7 @@ class SetPlayerFragment(private val router: Router) : Fragment() {
             viewModel.createPlayer()
         }
 
-        adapter.setOnItemClickListener(object : SetPlayerAdapter.onItemClickListener {
+        adapter.setOnItemClickListener(object : SetPlayerAdapter.OnItemClickListener {
             override fun onItemClick(position: Int) {
                 viewModel.setPlayers(list[position])
             }
