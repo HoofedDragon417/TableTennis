@@ -28,19 +28,36 @@ class GameVM : ViewModel() {
     }
 
     fun upScore(player: Players) {
-        if (player == Players.First) {
-            playerOneScore.value = playerOneScore.value!! + 1
-            gameInstructions()
+        when (player) {
+            Players.First -> {
+                playerOneScore.value = playerOneScore.value!! + 1
+                commonScore += 1
+                gameInstructions()
+            }
+            Players.Second -> {
+                playerTwoScore.value = playerTwoScore.value!! + 1
+                commonScore += 1
+                gameInstructions()
+            }
         }
+    }
 
-        if (player == Players.Second) {
-            playerTwoScore.value = playerTwoScore.value!! + 1
-            gameInstructions()
+    fun downScore(player: Players) {
+        when (player) {
+            Players.First -> {
+                playerOneScore.value = playerOneScore.value!! - 1
+                commonScore -= 1
+                gameInstructions()
+            }
+            Players.Second -> {
+                playerTwoScore.value = playerTwoScore.value!! - 1
+                commonScore -= 1
+                gameInstructions()
+            }
         }
     }
 
     private fun gameInstructions() {
-        commonScore += 1
         when (commonScore < 20) {
             true -> {
                 if (commonScore % 2 == 0) {
@@ -51,7 +68,7 @@ class GameVM : ViewModel() {
                     }
                 }
             }
-            else -> {
+            false -> {
                 when (pitcher.value) {
                     Pitcher.PlayerOne -> pitcher.value = Pitcher.PlayerTwo
                     Pitcher.PlayerTwo -> pitcher.value = Pitcher.PlayerOne

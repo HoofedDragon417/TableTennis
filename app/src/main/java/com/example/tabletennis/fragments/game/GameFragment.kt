@@ -55,8 +55,18 @@ class GameFragment(private val router: Router, private val gameModel: GamePlayer
             viewModel.upScore(player = Players.First)
         }
 
+        binding.tvPlayerOneScore.setOnLongClickListener {
+            viewModel.downScore(player=Players.First)
+            true
+        }
+
         binding.tvPlayerTwoScore.setOnClickListener {
             viewModel.upScore(player = Players.Second)
+        }
+
+        binding.tvPlayerTwoScore.setOnLongClickListener {
+            viewModel.downScore(player=Players.Second)
+            true
         }
 
         binding.tvPlayerOneName.setOnClickListener {

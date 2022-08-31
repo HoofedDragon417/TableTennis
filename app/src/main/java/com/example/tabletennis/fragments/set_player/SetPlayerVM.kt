@@ -37,10 +37,26 @@ class SetPlayerVM : ViewModel() {
 
     fun createPlayer() = router.navigateTo(Screens.CreatePlayer(router = router))
 
-    fun setPlayers(player: Player) {
-        if (playerOne.value == null)
-            playerOne.value = player
-        else playerTwo.value = player
+    fun setPlayers(player: Player, context: Context) {
+        if (playerOne.value == null) {
+            if (player.id == playerTwo.value?.id) {
+                Toast.makeText(context, R.string.another_players, Toast.LENGTH_SHORT).show()
+                return
+            } else {
+                playerOne.value = player
+                return
+            }
+        }
+
+        if (playerTwo.value == null) {
+            if (player.id == playerOne.value?.id) {
+                Toast.makeText(context, R.string.another_players, Toast.LENGTH_SHORT).show()
+                return
+            } else {
+                playerTwo.value = player
+                return
+            }
+        }
     }
 
     fun clearPlayer(player: Players) {
