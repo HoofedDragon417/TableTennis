@@ -1,4 +1,4 @@
-package com.example.tabletennis.fragments.set_player
+package com.example.tabletennis.fragments.set_game.set_ovo
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,27 +7,25 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.example.tabletennis.R
-import com.example.tabletennis.databinding.FragmentSetPlayerBinding
+import com.example.tabletennis.databinding.FragmentSetOvoPlayersBinding
 import com.example.tabletennis.models.Gender
-import com.example.tabletennis.models.Pitcher
 import com.example.tabletennis.models.Player
-import com.example.tabletennis.models.Players
+import com.example.tabletennis.models.Teams
 import com.example.tabletennis.recycleradapters.SetPlayerAdapter
 import com.github.terrakok.cicerone.Router
 
-class SetPlayerFragment(private val router: Router) : Fragment() {
-    private var _binding: FragmentSetPlayerBinding? = null
+class SetOvOFragment(private val router: Router) : Fragment() {
+    private var _binding: FragmentSetOvoPlayersBinding? = null
     private val binding get() = requireNotNull(_binding)
 
-    private val viewModel: SetPlayerVM by viewModels()
-
+    private val viewModel: SetOvOVM by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentSetPlayerBinding.inflate(inflater, container, false)
-        viewModel.setRouter(router)
+        _binding = FragmentSetOvoPlayersBinding.inflate(inflater, container, false)
+        viewModel.setRouter(router = router)
         return binding.root
     }
 
@@ -64,14 +62,14 @@ class SetPlayerFragment(private val router: Router) : Fragment() {
         viewModel.playerTwo.observe(requireActivity()) {
             if (it == null) {
                 setImageTwo(0)
-                binding.tvPlayerTwoName.text = null
+                binding.tvTeamTwoName.text = null
             } else {
                 when (it.gender) {
                     Gender.Male -> setImageTwo(R.drawable.avatar_male)
                     Gender.Female -> setImageTwo(R.drawable.avatar_female)
                     Gender.Alien -> setImageTwo(R.drawable.avatar_alien)
                 }
-                binding.tvPlayerTwoName.text = it.name
+                binding.tvTeamTwoName.text = it.name
             }
         }
 
@@ -86,21 +84,21 @@ class SetPlayerFragment(private val router: Router) : Fragment() {
         })
 
         binding.ivPlayerOneAvatar.setOnLongClickListener {
-            viewModel.clearPlayer(player = Players.First)
+            viewModel.clearPlayer(player = Teams.TeamFirst)
             true
         }
 
         binding.ivPlayerTwoAvatar.setOnLongClickListener {
-            viewModel.clearPlayer(player = Players.Second)
+            viewModel.clearPlayer(player = Teams.TeamSecond)
             true
         }
 
         binding.ivPlayerOneAvatar.setOnClickListener {
-            viewModel.startGame(pitcher = Pitcher.PlayerOne, context = requireActivity())
+            viewModel.startGame(pitcherPlayer = Teams.TeamFirst, context = requireActivity())
         }
 
         binding.ivPlayerTwoAvatar.setOnClickListener {
-            viewModel.startGame(pitcher = Pitcher.PlayerTwo, context = requireActivity())
+            viewModel.startGame(pitcherPlayer = Teams.TeamSecond, context = requireActivity())
         }
     }
 

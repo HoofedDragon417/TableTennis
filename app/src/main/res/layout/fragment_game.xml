@@ -3,13 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".fragments.game.GameFragment">
+    android:layout_height="match_parent">
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/tv_player_one_name"
+        android:id="@+id/tv_team_one_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textColorHint="#78909C"
         android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -17,9 +17,10 @@
         tools:hint="@string/player_hint" />
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/tv_player_two_name"
+        android:id="@+id/tv_team_two_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textColorHint="#78909C"
         android:textSize="30sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -30,7 +31,7 @@
         android:id="@+id/iv_player_one_pitcher"
         android:layout_width="25dp"
         android:layout_height="25dp"
-        app:layout_constraintStart_toEndOf="@id/tv_player_one_name"
+        app:layout_constraintStart_toEndOf="@id/tv_team_one_name"
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.appcompat.widget.AppCompatImageView
@@ -38,10 +39,10 @@
         android:layout_width="25dp"
         android:layout_height="25dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@id/tv_player_two_name" />
+        app:layout_constraintStart_toEndOf="@id/tv_team_two_name" />
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/tv_player_one_score"
+        android:id="@+id/tv_team_one_score"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="60dp"
@@ -50,15 +51,16 @@
         android:background="#2196F3"
         android:gravity="center"
         android:textColor="@color/white"
+        android:textColorHint="#283593"
         android:textSize="150sp"
-        app:layout_constraintBottom_toTopOf="@id/tv_player_two_score"
+        app:layout_constraintBottom_toTopOf="@id/tv_team_two_score"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_player_one_name"
+        app:layout_constraintTop_toBottomOf="@id/tv_team_one_name"
         tools:hint="@string/hint_zero" />
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/tv_player_two_score"
+        android:id="@+id/tv_team_two_score"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="60dp"
@@ -67,11 +69,12 @@
         android:background="#2196F3"
         android:gravity="center"
         android:textColor="@color/white"
+        android:textColorHint="#283593"
         android:textSize="150sp"
-        app:layout_constraintBottom_toTopOf="@id/tv_player_two_name"
+        app:layout_constraintBottom_toTopOf="@id/tv_team_two_name"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_player_one_score"
+        app:layout_constraintTop_toBottomOf="@id/tv_team_one_score"
         tools:hint="@string/hint_zero" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

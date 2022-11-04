@@ -32,8 +32,12 @@ class MainFragment(private val router: Router) : Fragment() {
             viewModel.exit()
         }
 
-        binding.btnStartGame.setOnClickListener {
-            viewModel.startGame()
+        binding.btnStartOvoGame.setOnClickListener {
+            viewModel.startOvOGame()
+        }
+
+        binding.btnStartTvtGame.setOnClickListener {
+            viewModel.startTvTGame()
         }
 
         binding.btnScore.setOnClickListener {
