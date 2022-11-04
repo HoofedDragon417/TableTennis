@@ -1,6 +1,6 @@
 package com.example.tabletennis.models
 
-class Player(
+data class Player(
     val id: Int = 0,
     val name: String,
     var wins: Int = 0,

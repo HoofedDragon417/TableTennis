@@ -1,23 +1,23 @@
-package com.example.tabletennis.fragments.set_player
+package com.example.tabletennis.fragments.set_game.set_ovo
 
 import android.content.Context
-import android.util.Log
 import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.tabletennis.R
 import com.example.tabletennis.Screens
-import com.example.tabletennis.models.GamePlayers
-import com.example.tabletennis.models.Pitcher
+import com.example.tabletennis.models.Gender
 import com.example.tabletennis.models.Player
-import com.example.tabletennis.models.Players
+import com.example.tabletennis.models.Teams
 import com.example.tabletennis.storage.DataBase
 import com.github.terrakok.cicerone.Router
 
-class SetPlayerVM : ViewModel() {
+class SetOvOVM : ViewModel() {
 
     private var routerNull: Router? = null
     private val router get() = requireNotNull(routerNull)
+    private val arrayOfPlayers =
+        arrayOf(Player(name = "", gender = Gender.Alien), Player(name = "", gender = Gender.Alien))
 
     fun setRouter(router: Router) {
         routerNull = router
@@ -26,10 +26,6 @@ class SetPlayerVM : ViewModel() {
     val listOfPlayers = MutableLiveData<ArrayList<Player>>()
     var playerOne = MutableLiveData<Player?>()
     var playerTwo = MutableLiveData<Player?>()
-
-    init {
-        Log.e("Test", "${playerOne.value}")
-    }
 
     fun getListOfPlayers(context: Context) {
         listOfPlayers.value = DataBase(context).viewPlayers()
@@ -59,26 +55,28 @@ class SetPlayerVM : ViewModel() {
         }
     }
 
-    fun clearPlayer(player: Players) {
+    fun clearPlayer(player: Teams) {
         when (player) {
-            Players.First -> playerOne.value = null
-            Players.Second -> playerTwo.value = null
+            Teams.TeamFirst -> playerOne.value = null
+            Teams.TeamSecond -> playerTwo.value = null
         }
     }
 
-    fun startGame(pitcher: Pitcher, context: Context) {
+    fun startGame(pitcherPlayer: Teams, context: Context) {
         if ((playerOne.value == null) or (playerTwo.value == null)) {
             Toast.makeText(context, context.getString(R.string.choose_players), Toast.LENGTH_SHORT)
                 .show()
             return
         } else {
-            val game =
-                GamePlayers(
-                    playerOne = playerOne.value!!,
-                    playerTwo = playerTwo.value!!,
-                    pitcher = pitcher
+            arrayOfPlayers[0] = playerOne.value!!
+            arrayOfPlayers[1] = playerTwo.value!!
+            router.navigateTo(
+                Screens.StartOvOGame(
+                    router = router,
+                    pitcherPlayer,
+                    players = arrayOfPlayers
                 )
-            router.navigateTo(Screens.StartGame(router, gamePlayers = game))
+            )
         }
     }
 }

@@ -14,7 +14,9 @@ class MainVM : ViewModel() {
         routerNull = router
     }
 
-    fun startGame() = router.navigateTo(Screens.SetPlayers(router = router))
+    fun startOvOGame() = router.navigateTo(Screens.SetOvOPlayers(router = router))
+
+    fun startTvTGame()=router.navigateTo(Screens.SetTvTPlayers(router = router))
 
     fun score() = router.navigateTo(Screens.Score(router = router))
 
