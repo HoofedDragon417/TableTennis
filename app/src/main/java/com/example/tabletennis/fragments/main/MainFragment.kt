@@ -28,6 +28,9 @@ class MainFragment(private val router: Router) : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        /**
+         * Нажаните кнопок перемещает на выбранный экран, либо выходит из приложения.
+         * */
         binding.btnExit.setOnClickListener {
             viewModel.exit()
         }

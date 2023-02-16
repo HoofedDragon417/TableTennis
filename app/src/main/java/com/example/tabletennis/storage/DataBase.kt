@@ -45,6 +45,9 @@ class DataBase(context: Context) :
         onCreate(database)
     }
 
+    /**Сохраняет данные нового игрока в БД.
+     *
+     * @param player новый игрок.*/
     fun savePlayer(player: Player) {
         val db = this.writableDatabase
 
@@ -65,6 +68,9 @@ class DataBase(context: Context) :
         db.close()
     }
 
+    /**Обновляет данные существующего игрока по окончанию игры.
+     *
+     * @param player игрок, данные которого надо обновить.*/
     fun updatePlayers(player: Player) {
         val db = this.writableDatabase
 
@@ -78,6 +84,11 @@ class DataBase(context: Context) :
         db.close()
     }
 
+    /**
+     * Собирает всех игроков, которые есть в БД, в единый список.
+     *
+     * @return [ArrayList] игроков.
+     * */
     fun viewPlayers(): ArrayList<Player> {
 
         val list = ArrayList<Player>()

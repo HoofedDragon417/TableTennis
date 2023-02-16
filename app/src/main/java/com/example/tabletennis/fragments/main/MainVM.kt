@@ -14,6 +14,11 @@ class MainVM : ViewModel() {
         routerNull = router
     }
 
+    /**
+     * Функции навигации между экранами.
+     *
+     * @param router принимается всеми для навигации в последующих экранах.
+     * */
     fun startOvOGame() = router.navigateTo(Screens.SetOvOPlayers(router = router))
 
     fun startTvTGame()=router.navigateTo(Screens.SetTvTPlayers(router = router))

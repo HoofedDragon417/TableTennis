@@ -18,6 +18,7 @@ class ScoreVM : ViewModel() {
 
     val listOfPlayers = MutableLiveData<ArrayList<Player>>()
 
+    /**Возвращает [ArrayList] игроков.*/
     fun getListOfPlayers(context: Context) {
         listOfPlayers.value = DataBase(context).viewPlayers()
     }

@@ -32,24 +32,26 @@ class OvOGameFragment(
         return binding.root
     }
 
+    /**
+     * Подписываемся на обновление параметров.
+     * */
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel.playerOne.observe(requireActivity()) {
+        viewModel.playerOne.observe(viewLifecycleOwner) {
             binding.tvTeamOneName.text =
                 requireContext().getString(R.string.ovo_teams_name, it.name)
         }
 
-        viewModel.playerTwo.observe(requireActivity()) {
+        viewModel.playerTwo.observe(viewLifecycleOwner) {
             binding.tvTeamTwoName.text =
                 requireContext().getString(R.string.ovo_teams_name, it.name)
         }
 
-        viewModel.pitcherTeam.observe(requireActivity()) {
-            when (it) {
+        viewModel.pitcherTeam.observe(viewLifecycleOwner) {
+            when (requireNotNull(it)) {
                 Teams.TeamFirst -> setImages(firstID = R.drawable.pitcher_sign, secondID = 0)
                 Teams.TeamSecond -> setImages(secondID = R.drawable.pitcher_sign, firstID = 0)
-                null -> {}
             }
         }
 
@@ -61,12 +63,11 @@ class OvOGameFragment(
             binding.tvTeamTwoScore.text = it.toString()
         }
 
+        /**
+         * Увеличение или уменьшение счёта первого игрока.
+         * */
         binding.tvTeamOneScore.setOnClickListener {
             viewModel.increasePoints(player = Teams.TeamFirst)
-        }
-
-        binding.tvTeamTwoScore.setOnClickListener {
-            viewModel.increasePoints(player = Teams.TeamSecond)
         }
 
         binding.tvTeamOneScore.setOnLongClickListener {
@@ -74,11 +75,21 @@ class OvOGameFragment(
             true
         }
 
+        /**
+         * Увеличение или уменьшение счёта второго игрока.
+         * */
+        binding.tvTeamTwoScore.setOnClickListener {
+            viewModel.increasePoints(player = Teams.TeamSecond)
+        }
+
         binding.tvTeamTwoScore.setOnLongClickListener {
             viewModel.decreasePoints(player = Teams.TeamSecond)
             true
         }
 
+        /**
+         * Нажатие на имя игрока заверщает игру и возращает на экран выбора игроков.
+         * */
         binding.tvTeamOneName.setOnClickListener {
             viewModel.stopGame(context = requireContext(), winner = Teams.TeamFirst)
         }
@@ -88,6 +99,12 @@ class OvOGameFragment(
         }
     }
 
+    /**
+     * Меняет метку подающего у игроков.
+     *
+     * @param firstID принимает id рисунка drawable для первого игрока.
+     * @param secondID принимает id рисунка drawable для второго игрока.
+     * */
     private fun setImages(firstID: Int, secondID: Int) {
         binding.ivPlayerOnePitcher.setImageResource(firstID)
         binding.ivPlayerTwoPitcher.setImageResource(secondID)

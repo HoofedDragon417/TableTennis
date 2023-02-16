@@ -32,6 +32,9 @@ class CreatePlayerFragment(private val router: Router) : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        /**
+         * Создаёт нового игрока по имени и гендеру (разная аватарка).
+         * */
         binding.btnAddPlayer.setOnClickListener {
             val playerName = binding.etPlayerName.text.toString()
             val playerGender = when {
@@ -49,6 +52,9 @@ class CreatePlayerFragment(private val router: Router) : Fragment() {
             viewModel.createRec(player, requireContext())
         }
 
+        /**
+         * Выходит с экрана.
+         * */
         binding.ivArrowBack.setOnClickListener {
             viewModel.exitFragment()
         }
