@@ -9,6 +9,7 @@ import com.github.terrakok.cicerone.androidx.AppNavigator
 
 class MainActivity : AppCompatActivity() {
 
+    //Test comment
     private val cicerone = Cicerone.create()
     private val router get() = cicerone.router
     private val navigatorHolder get() = cicerone.getNavigatorHolder()
